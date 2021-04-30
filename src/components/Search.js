@@ -26,7 +26,12 @@ class Search extends Component {
               this.props.searchSubmit(data.hits)
               this.props.clearSearchBar()
           })
-          this.props.addPreviousSearch(this.props.searchTerm)
+          if (this.props.prevSearch.includes(this.props.searchTerm)) {
+            return this.props.searchTerm
+          } else {
+            this.props.addPreviousSearch(this.props.searchTerm)
+          }
+         
           
              
     }
