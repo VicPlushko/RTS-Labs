@@ -22,8 +22,13 @@ class Search extends Component {
         ? window.alert("Please enter a search with 2 or more characters")
         : fetch(URL + this.props.searchTerm)
           .then(resp => resp.json())
-          .then(data => this.props.searchSubmit(data.hits))
-          .then(this.props.addPreviousSearch(this.props.searchTerm))    
+          .then(data => {
+              this.props.searchSubmit(data.hits)
+              this.props.clearSearchBar()
+          })
+          this.props.addPreviousSearch(this.props.searchTerm)
+          
+             
     }
     render() {
 
@@ -32,7 +37,7 @@ class Search extends Component {
         return (
             <>
             <div>
-                <SearchBar handleChange={this.handleInputChange} handleSubmit={this.handleSearchSubmit}/>
+                <SearchBar handleChange={this.handleInputChange} handleSubmit={this.handleSearchSubmit} search={this.props.searchTerm}/>
                 <div className='container'>
                     <PreviousSearches />
                 </div>

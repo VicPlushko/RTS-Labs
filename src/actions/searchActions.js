@@ -21,3 +21,9 @@ export const startSearch = () => {
         dispatch({type: "START_SEARCH"})
     }
 }
+
+export const clearSearchBar = () => {
+    return dispatch => {
+        dispatch({type: "CLEAR_SEARCH"})
+    }
+}

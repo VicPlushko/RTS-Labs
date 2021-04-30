@@ -18,6 +18,8 @@ const rootReducer = (state = initialState, action) => {
             return {...state, searchTerm: action.payload}
         case("ADD_PREV_SEARCH"):
             return {...state, prevSearch: [...state.prevSearch, action.payload]}
+        case("CLEAR_SEARCH"):
+            return {...state, searchTerm: ""}
         default:
             return state
     }
