@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
           Search Hacker News
       </header>
-      <Search />
+        <Search />
     </div>
   );
 }

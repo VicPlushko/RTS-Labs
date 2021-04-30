@@ -5,6 +5,7 @@ import * as searchActions from '../actions/searchActions'
 import { bindActionCreators } from 'redux'
 import Article from './Article'
 import moment from 'moment'
+import PreviousSearches from './PreviousSearches'
 
 class Search extends Component {
 
@@ -32,6 +33,9 @@ class Search extends Component {
             <>
             <div>
                 <SearchBar handleChange={this.handleInputChange} handleSubmit={this.handleSearchSubmit}/>
+                <div className='container'>
+                    <PreviousSearches />
+                </div>
             </div>
             <div>
                 <h1>Articles:</h1>
