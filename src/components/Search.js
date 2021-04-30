@@ -36,9 +36,21 @@ class Search extends Component {
              
     }
     render() {
+        const {
+            results,  
+            searching 
+        } = this.props
 
-        const articles = this.props.results.map((article, i) => <Article key={i} title={article.title} author={upcaseName(article.author)} url={article.url} written_on={moment(article.created_at).format('MM-DD-YYYY')} upvotes={article.points} />) 
-        console.log("search props is", this.props)
+        const articles = results.map((article, i) => (
+                <Article 
+                    key={i} 
+                    title={article.title} 
+                    author={upcaseName(article.author)} 
+                    url={article.url} 
+                    written_on={moment(article.created_at).format('MM-DD-YYYY')} 
+                    upvotes={article.points} />
+        ))
+        
         return (
             <>
             <div>
@@ -49,7 +61,7 @@ class Search extends Component {
             </div>
             <div>
                 <h1>Articles:</h1>
-                {this.props.searching
+                {searching
                 ? <h3>Searching...</h3>
                 : articles
                 }
@@ -59,16 +71,12 @@ class Search extends Component {
     }
 }
 
+
 const upcaseName = (name) => {
     return name.charAt(0).toUpperCase() + name.slice(1)
 }
 
-// const splitDate = (date) => {
-//     return date.split("T")[0]
-// } 
-
 const mapStateToProps = globalState => {
-    console.log("Search global state is", globalState)
     return {
         searchTerm: globalState.searchTerm,
         prevSearch: globalState.prevSearch,
@@ -80,4 +88,5 @@ const mapStateToProps = globalState => {
 const mapDispatchToProps = dispatch => {
     return {...bindActionCreators(searchActions, dispatch)}
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Search) 

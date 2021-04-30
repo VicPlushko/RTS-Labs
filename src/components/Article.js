@@ -11,7 +11,6 @@ const Article = (props) => {
             <div className='line-break'>
                <hr /> 
             </div>
-            
         </div>
     )
 }

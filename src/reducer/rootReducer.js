@@ -4,7 +4,7 @@ const initialState = {
     searchTerm: "",
     searching: false
 }
-//Use combineReducers() if more reducers are needed.
+
 const rootReducer = (state = initialState, action) => {
     switch(action.type) {
         case("START_SEARCH"):
