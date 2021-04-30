@@ -12,11 +12,12 @@ const rootReducer = (state = initialState, action) => {
         case("SEARCH_COMPLETE"):
             return {...state, 
                    searching: false,
-                   results: action.payload, 
-                   prevSearch: [...state.prevSearch, action.payload] 
+                   results: action.payload
                    }
         case("CHANGE_INPUT"):
             return {...state, searchTerm: action.payload}
+        case("ADD_PREV_SEARCH"):
+            return {...state, prevSearch: [...state.prevSearch, action.payload]}
         default:
             return state
     }
