@@ -2,7 +2,8 @@ import { connect } from 'react-redux'
 import Dropdown from 'react-dropdown'
 
 const PreviousSearches = (props) => {
-    const options = props.prevSearch.map((search) => search)
+    const {prevSearch} = props
+    const options = prevSearch.map((search) => search)
     
     return (
         <div>
@@ -11,7 +12,7 @@ const PreviousSearches = (props) => {
     )
 }
 
-const mapStateToProps = globalState => {
+const mapStateToProps = (globalState) => {
     return {
         prevSearch: globalState.prevSearch
     }

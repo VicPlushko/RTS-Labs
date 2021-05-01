@@ -6,11 +6,11 @@ import { bindActionCreators } from 'redux'
 import Article from './Article'
 import moment from 'moment'
 import PreviousSearches from './PreviousSearches'
+import { upcaseName } from '../utility'
 
 class Search extends Component {
 
     handleInputChange = (event) => {
-        console.log(event.target.value)
         this.props.changeInput(event.target.value)
     }
 
@@ -42,13 +42,13 @@ class Search extends Component {
         } = this.props
 
         const articles = results.map((article, i) => (
-                <Article 
-                    key={i} 
-                    title={article.title} 
-                    author={upcaseName(article.author)} 
-                    url={article.url} 
-                    written_on={moment(article.created_at).format('MM-DD-YYYY')} 
-                    upvotes={article.points} />
+            <Article 
+                key={i} 
+                title={article.title} 
+                author={upcaseName(article.author)} 
+                url={article.url} 
+                written_on={moment(article.created_at).format('MM-DD-YYYY')} 
+                upvotes={article.points} />
         ))
         
         return (
@@ -71,12 +71,7 @@ class Search extends Component {
     }
 }
 
-
-const upcaseName = (name) => {
-    return name.charAt(0).toUpperCase() + name.slice(1)
-}
-
-const mapStateToProps = globalState => {
+const mapStateToProps = (globalState) => {
     return {
         searchTerm: globalState.searchTerm,
         prevSearch: globalState.prevSearch,
@@ -85,7 +80,7 @@ const mapStateToProps = globalState => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {...bindActionCreators(searchActions, dispatch)}
 }
 
