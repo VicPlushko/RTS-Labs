@@ -1,3 +1,14 @@
+export const getArticles = (searchTerm) => {
+    const URL = "http://hn.algolia.com/api/v1/search?query="
+
+    return dispatch => {
+        dispatch({type:"START_SEARCH"})
+        fetch(URL + searchTerm)
+        .then(resp => resp.json())
+        .then(data => dispatch({type: "SEARCH_COMPLETE", payload: data.hits}))
+    }
+}
+
 export const changeInput = (value) => {
     return dispatch => {
         dispatch({type: "CHANGE_INPUT", payload: value})

@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import Article from './Article'
 import moment from 'moment'
 import PreviousSearches from './PreviousSearches'
-import { upcaseName } from '../utility'
+import { upcaseName } from '../utility/upcaseName'
 
 class Search extends Component {
 
@@ -15,26 +15,23 @@ class Search extends Component {
     }
 
     handleSearchSubmit = (event) => {
+        const {
+            searchTerm,
+            prevSearch
+        } = this.props
+
         event.preventDefault()
-        const URL = "http://hn.algolia.com/api/v1/search?query="
-        this.props.startSearch()
-        this.props.searchTerm.length < 2 
+        searchTerm.length < 2 
         ? window.alert("Please enter a search with 2 or more characters")
-        : fetch(URL + this.props.searchTerm)
-          .then(resp => resp.json())
-          .then(data => {
-              this.props.searchSubmit(data.hits)
-              this.props.clearSearchBar()
-          })
-          if (this.props.prevSearch.includes(this.props.searchTerm)) {
-            return this.props.searchTerm
+        : this.props.getArticles(searchTerm)
+          this.props.clearSearchBar()
+          if (prevSearch.includes(searchTerm)) {
+            return searchTerm
           } else {
-            this.props.addPreviousSearch(this.props.searchTerm)
-          }
-         
-          
-             
+            this.props.addPreviousSearch(searchTerm)
+          }      
     }
+
     render() {
         const {
             results,  
@@ -69,6 +66,7 @@ class Search extends Component {
             </>
         )
     }
+
 }
 
 const mapStateToProps = (globalState) => {
